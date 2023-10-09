@@ -1,12 +1,13 @@
 import React from "react";
+import Border from "./Border";
 
 const Button = (props) => {
   return (
-    <>
-      <button type="button" className="border-red-900 p-2 border-2" onClick={props.onClick}>
+    <Border className="bg-white shadow-lg">
+      <button type="button" className="p-1 text-black" onClick={props.onClick}>
         {props.name}
       </button>
-    </>
+    </Border>
   );
 };
 
