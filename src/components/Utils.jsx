@@ -7,24 +7,27 @@ const Utils = ({ col }) => {
   const [textArr, setTestArr] = useState([]);
 
   const speak = () => {
-    console.log(window.speechSynthesis);
+    window.speechSynthesis.cancel();
     let msg = new SpeechSynthesisUtterance();
     msg.text = text;
     window.speechSynthesis.speak(msg);
   };
+  const cancel = () => {
+    window.speechSynthesis.cancel();
+  };
   const pause = () => {
     window.speechSynthesis.pause();
-    console.log(window.speechSynthesis);
   };
   const resume = () => {
     window.speechSynthesis.resume();
-    console.log(window.speechSynthesis);
   };
 
   const handleExtraSpaces = () => {
     let words = text.split(" ").filter((ele) => ele !== "");
     setText(words.join(" "));
   };
+
+  const handelCopy = () => {};
 
   const camelCase = () => {
     let str = text;
@@ -33,7 +36,6 @@ const Utils = ({ col }) => {
         .split(" ")
         .reduce((s, c) => s + (c.charAt(0).toUpperCase() + c.slice(1)))
     );
-    console.log(camelCasetext);
   };
 
   useEffect(() => {
@@ -44,8 +46,9 @@ const Utils = ({ col }) => {
   return (
     <div
       className="text-center h-screen w-full flex flex-col items-center"
-      style={{ background: col }}
+      style={{ background: `rgb(${col.join(",")})` }}
     >
+      <h3 className="pt-6 font-bold font-xl">TEXT UTILS</h3>
       <label htmlFor="text" className="mt-8">
         Enter your text below
       </label>
@@ -61,9 +64,18 @@ const Utils = ({ col }) => {
           setText(e.target.value);
         }}
       />
-      <div>Number of Words: {textArr.length}</div>
-      <div>Number of Letters: {text.trim().length}</div>
-      {text && <div>Output: {text}</div>}
+      <div className="font-bold">Number of Words: {textArr.length}</div>
+      <div className="font-bold">Number of Letters: {text.trim().length}</div>
+      {text && (
+        <div className="text-justify p-5 lg:px-40">
+          Output: {text.slice(0, 500)}
+        </div>
+      )}
+      {text.trim().length > 500 && (
+        <div className="font-bold">
+          ...... remaining {text.trim().length - 500} Letters are not displayed
+        </div>
+      )}
       <div className="p-3 flex-row gap-4 justify-center">
         <div className="flex gap-4 my-4 justify-center">
           <Button
@@ -84,11 +96,13 @@ const Utils = ({ col }) => {
         </div>
         <div className="flex gap-4 my-4 justify-center">
           <Button onClick={handleExtraSpaces} name="Remove Extra Space" />
+          <Button onClick={handelCopy} name="Copy" />
         </div>
         <div className="flex gap-4 justify-center">
-          <Button onClick={speak} name="Read Aloud" />
+          <Button onClick={speak} name="ReadAloud" />
           <Button onClick={pause} name="Pause" />
           <Button onClick={resume} name="Resume" />
+          <Button onClick={cancel} name="Cancel" />
         </div>
       </div>
     </div>
