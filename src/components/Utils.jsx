@@ -76,12 +76,12 @@ const Utils = ({ col }) => {
       <div className="font-bold">Number of Letters: {text.trim().length}</div>
       {disText && (
         <div className="text-justify p-5 lg:px-40">
-          Output: {disText.slice(0, 500)}
+          Output: {disText.slice(0, 100)}
         </div>
       )}
-      {disText.trim().length > 500 && (
+      {disText.trim().length > 100 && (
         <div className="font-bold">
-          ...... remaining {disText.trim().length - 500} Letters are not
+          ...... remaining {disText.trim().length - 100} Letters are not
           displayed
         </div>
       )}
