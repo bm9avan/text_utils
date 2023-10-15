@@ -9,7 +9,7 @@ const BGchanger = ({ handelCol }) => {
   useEffect(() => {
     const t = setTimeout(handelCol([r, g, b]), 1000);
     return clearTimeout(t);
-  }, [r, g, b, handelCol]);
+  }, [r, g, b]);
   return (
     <div className="justify-center flex">
       <div className="fixed flex flex-col items-center justify-center bottom-20">

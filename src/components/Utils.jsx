@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Button from "../UI/Button";
 
 const Utils = ({ col }) => {
   const [text, setText] = useState("Default text from Utils");
   const [camelCasetext, setCamelCaseText] = useState(null);
   const [textArr, setTestArr] = useState([]);
+  const textRef = useRef(null);
+  const disText = camelCasetext || text;
 
   const speak = () => {
     window.speechSynthesis.cancel();
@@ -27,12 +29,16 @@ const Utils = ({ col }) => {
     setText(words.join(" "));
   };
 
-  const handelCopy = () => {};
+  const handelCopy = () => {
+    textRef.current.select();
+    navigator.clipboard.writeText(disText);
+  };
 
   const camelCase = () => {
     let str = text;
     setCamelCaseText(
       str
+        .toLocaleLowerCase()
         .split(" ")
         .reduce((s, c) => s + (c.charAt(0).toUpperCase() + c.slice(1)))
     );
@@ -54,26 +60,29 @@ const Utils = ({ col }) => {
       </label>
       <textarea
         name="text"
-        placeholder="enter your text here"
+        placeholder="Enter your text here"
         id="text"
-        className="w-4/5 border-red-800 border-2 text-black"
-        rows="3"
+        ref={textRef}
+        className="w-4/5 p-3 border border-red-300 rounded-lg text-black focus:ring focus:ring-red-500 focus:border-red-500 focus:border-2 focus:border-opacity-50"
+        rows="4"
         value={camelCasetext || text}
         onChange={(e) => {
           setCamelCaseText(null);
           setText(e.target.value);
         }}
       />
+
       <div className="font-bold">Number of Words: {textArr.length}</div>
       <div className="font-bold">Number of Letters: {text.trim().length}</div>
-      {text && (
+      {disText && (
         <div className="text-justify p-5 lg:px-40">
-          Output: {text.slice(0, 500)}
+          Output: {disText.slice(0, 500)}
         </div>
       )}
-      {text.trim().length > 500 && (
+      {disText.trim().length > 500 && (
         <div className="font-bold">
-          ...... remaining {text.trim().length - 500} Letters are not displayed
+          ...... remaining {disText.trim().length - 500} Letters are not
+          displayed
         </div>
       )}
       <div className="p-3 flex-row gap-4 justify-center">
