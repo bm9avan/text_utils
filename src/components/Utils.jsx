@@ -86,33 +86,27 @@ const Utils = ({ col }) => {
         </div>
       )}
       <div className="p-3 flex-row gap-4 justify-center">
-        <div className="flex gap-4 my-4 justify-center">
-          <Button
-            onClick={() => {
-              setText(text.toUpperCase());
-              setCamelCaseText(null);
-            }}
-            name="UpperCase"
-          />
-          <Button
-            onClick={() => {
-              setText(text.toLowerCase());
-              setCamelCaseText(null);
-            }}
-            name="LowerCase"
-          />
-          <Button onClick={camelCase} name="CamelCase" />
-        </div>
-        <div className="flex gap-4 my-4 justify-center">
-          <Button onClick={handleExtraSpaces} name="Remove Extra Space" />
-          <Button onClick={handelCopy} name="Copy" />
-        </div>
-        <div className="flex gap-4 justify-center">
-          <Button onClick={speak} name="ReadAloud" />
-          <Button onClick={pause} name="Pause" />
-          <Button onClick={resume} name="Resume" />
-          <Button onClick={cancel} name="Cancel" />
-        </div>
+        <Button
+          onClick={() => {
+            setText(text.toUpperCase());
+            setCamelCaseText(null);
+          }}
+          name="UpperCase"
+        />
+        <Button
+          onClick={() => {
+            setText(text.toLowerCase());
+            setCamelCaseText(null);
+          }}
+          name="LowerCase"
+        />
+        <Button onClick={camelCase} name="CamelCase" />
+        <Button onClick={handleExtraSpaces} name="Remove Extra Space" />
+        <Button onClick={handelCopy} name="Copy" />
+        <Button onClick={speak} name="ReadAloud" />
+        <Button onClick={pause} name="Pause" />
+        <Button onClick={resume} name="Resume" />
+        <Button onClick={cancel} name="Cancel" />
       </div>
     </div>
   );
