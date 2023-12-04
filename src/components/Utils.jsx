@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Button from "../UI/Button";
+import RTE from "./RTE";
 
 const Utils = ({ col }) => {
   const [text, setText] = useState("Default text from Utils");
@@ -58,7 +59,7 @@ const Utils = ({ col }) => {
       <label htmlFor="text" className="mt-8">
         Enter your text below
       </label>
-      <textarea
+      {/* <textarea
         name="text"
         placeholder="Enter your text here"
         id="text"
@@ -70,7 +71,9 @@ const Utils = ({ col }) => {
           setCamelCaseText(null);
           setText(e.target.value);
         }}
-      />
+      /> */}
+
+      <RTE />
 
       <div className="font-bold">Number of Words: {textArr.length}</div>
       <div className="font-bold">Number of Letters: {text.trim().length}</div>
